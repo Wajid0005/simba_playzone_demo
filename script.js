@@ -12,77 +12,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const premiumEnhancements = () => {
-    /* 1. Custom Cursor & Sparkles */
-    const cursor = document.getElementById('custom-cursor');
-    let lastSparkleTime = 0;
-
-    window.addEventListener('mousemove', (e) => {
-        if (cursor) {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        }
-
-        const now = Date.now();
-        if (now - lastSparkleTime > 40) {
-            const sparkle = document.createElement('div');
-            sparkle.classList.add('sparkle');
-            sparkle.style.left = e.clientX + 'px';
-            sparkle.style.top = e.clientY + 'px';
-            document.body.appendChild(sparkle);
-            setTimeout(() => sparkle.remove(), 800);
-            lastSparkleTime = now;
-        }
-    });
-
-    /* 2. Infinite Marquee */
+    /* Marquee */
     const marqueeTrack = document.getElementById('gallery-track');
     if (marqueeTrack) {
         marqueeTrack.innerHTML += marqueeTrack.innerHTML;
     }
 
-    /* 3. True Depth Parallax Scrolling */
+    /* True Depth Parallax Scrolling */
     window.addEventListener('scroll', () => {
         document.documentElement.style.setProperty('--scroll', window.scrollY);
     });
 
-    /* 4. Mascot Easter Eggs */
-    const mascots = document.querySelectorAll('.clickable-mascot');
-    mascots.forEach(mascot => {
-        mascot.addEventListener('click', (e) => {
-            mascot.classList.add('spin-anim');
-            setTimeout(() => mascot.classList.remove('spin-anim'), 600);
-            for (let i = 0; i < 15; i++) createSparkleBurst(e.clientX, e.clientY);
-        });
-    });
-
-    function createSparkleBurst(x, y) {
-        const colors = ['#FFD700', '#4FC3F7', '#FF6B6B', '#A8E063', '#C9B1FF'];
-        const confetti = document.createElement('div');
-        const size = Math.random() * 8 + 5 + 'px';
-        confetti.style.width = size;
-        confetti.style.height = size;
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.position = 'fixed';
-        confetti.style.left = x + 'px';
-        confetti.style.top = y + 'px';
-        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-        confetti.style.pointerEvents = 'none';
-        confetti.style.zIndex = '9999';
-
-        document.body.appendChild(confetti);
-
-        const tx = (Math.random() - 0.5) * 150;
-        const ty = (Math.random() - 0.5) * 150;
-        const rot = Math.random() * 360;
-
-        const anim = confetti.animate([
-            { transform: 'translate(-50%, -50%) rotate(0deg)', opacity: 1 },
-            { transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) rotate(${rot}deg)`, opacity: 0 }
-        ], { duration: Math.random() * 500 + 500, easing: 'cubic-bezier(.37,0,.63,1)' });
-        anim.onfinish = () => confetti.remove();
-    }
-
-    /* 6. Night Mode Toggle */
+    /* Night Mode Toggle */
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
@@ -91,7 +32,6 @@ const premiumEnhancements = () => {
         });
     }
 };
-
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -156,8 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                // Optional: stop observing once animated
-                // observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
@@ -251,8 +189,6 @@ document.addEventListener('DOMContentLoaded', () => {
         loyaltyForm.addEventListener('submit', (e) => {
             e.preventDefault(); // prevent reload
 
-            const btnRect = notifyBtn.getBoundingClientRect();
-
             // Create mini confetti elements rapidly
             for (let i = 0; i < 30; i++) {
                 createConfettiParticle();
@@ -305,32 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         anim.onfinish = () => confetti.remove();
     }
-
-    /* =====================================
-       7. Hero Background Confetti Rain Loop
-       ===================================== */
-    function createHeroConfetti() {
-        const container = document.querySelector('.confetti-container');
-        if (!container) return;
-
-        const colors = ['#FFD700', '#4FC3F7', '#FF6B6B', '#A8E063', '#C9B1FF'];
-        const piece = document.createElement('div');
-
-        piece.classList.add('confetti-piece');
-        piece.style.left = Math.random() * 100 + 'vw';
-        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        piece.style.animationDuration = (Math.random() * 3 + 2) + 's'; // 2-5s
-
-        container.appendChild(piece);
-
-        // Remove after animation finishes
-        setTimeout(() => {
-            piece.remove();
-        }, 5000);
-    }
-
-    // Create new confetti every 300ms
-    setInterval(createHeroConfetti, 300);
 
     premiumEnhancements();
 });
