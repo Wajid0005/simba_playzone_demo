@@ -420,27 +420,11 @@ a { text-decoration: none; color: inherit; }
   animation-delay: 5s;
 }
 
-.confetti-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
 
-.confetti-piece {
-  position: absolute;
-  width: 10px;
-  height: 20px;
-  background-color: var(--primary-yellow);
-  top: -20px;
-  animation: rain 5s linear infinite;
-}
 
-@keyframes rain {
-  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+
+
+
   100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
 }
 
@@ -1210,7 +1194,7 @@ a { text-decoration: none; color: inherit; }
    MEDIA QUERIES (RESPONSIVE)
    ========================================= */
 @media (max-width: 900px) {
-  .about-grid, .contact-grid { grid-template-columns: 1fr; }
+  .about-grid, .contact-grid, .pricing-grid { grid-template-columns: 1fr; }
   .footer-content { grid-template-columns: 1fr; text-align: center; }
   .social-icons { justify-content: center; }
   .about-stats { grid-template-columns: 1fr; }
@@ -1246,9 +1230,9 @@ a { text-decoration: none; color: inherit; }
   .nav-links a { font-size: 1.5rem; }
   .nav-cta { margin-top: 30px; }
   
-  .timer { gap: 10px; }
-  .time-box { height: 80px; width: 70px; }
-  .time-val { font-size: 2rem; }
+  .timer { gap: 5px; }
+  .time-box { height: 70px; width: 60px; }
+  .time-val { font-size: 1.8rem; } .colon { font-size: 1.5rem; }
   
   .hero-buttons { flex-direction: column; width: 100%; align-items: center;}
   .hero-buttons .btn { width: 80%; }
@@ -1286,37 +1270,6 @@ body.dark-theme .faq-item {
   background-color: var(--card-bg);
 }
 
-/* 1. Custom Cursor */
-* { cursor: none; }
-.custom-cursor {
-  position: fixed;
-  top: 0; left: 0;
-  width: 20px; height: 20px;
-  background: var(--primary-yellow);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 10000;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: difference;
-  transition: width 0.2s, height 0.2s;
-}
-a:hover ~ .custom-cursor, button:hover ~ .custom-cursor {
-  width: 40px; height: 40px;
-}
-.sparkle {
-  position: fixed;
-  width: 10px; height: 10px;
-  background: var(--primary-blue);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  animation: sparkle-fade 0.8s linear forwards;
-}
-@keyframes sparkle-fade {
-  0% { transform: scale(1) translate(-50%, -50%); opacity: 1; }
-  100% { transform: scale(0) translate(-50%, 50px); opacity: 0; }
-}
-
 /* 2. Marquee */
 .marquee-container {
   width: 100%;
@@ -1342,20 +1295,6 @@ a:hover ~ .custom-cursor, button:hover ~ .custom-cursor {
 .parallax-bg, .parallax-obj {
   transform: translateY(calc(var(--scroll, 0) * var(--parallax-speed, 0.1) * 1px));
   will-change: transform;
-}
-
-/* 4. Easter Eggs */
-.clickable-mascot {
-  transition: transform 0.3s ease;
-  transform-origin: center;
-}
-.clickable-mascot.spin-anim {
-  animation: egg-spin 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-@keyframes egg-spin {
-  0% { transform: rotate(0deg) scale(1); }
-  50% { transform: rotate(180deg) scale(1.3); }
-  100% { transform: rotate(360deg) scale(1); }
 }
 
 /* 5. Preloader */
@@ -1400,3 +1339,8 @@ a:hover ~ .custom-cursor, button:hover ~ .custom-cursor {
 .theme-toggle:hover {
   transform: scale(1.2);
 }
+
+
+
+
+
